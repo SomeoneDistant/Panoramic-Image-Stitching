@@ -1,8 +1,8 @@
 # Demo code for detecting and matching SIFT features
 
-David Lowe (lowe@cs.ubc.ca)
+### David Lowe (lowe@cs.ubc.ca)
 
-Version 4, July 6, 2005
+### Version 4, July 6, 2005
 
 This directory contains compiled binary programs for finding SIFT
 invariant features that can run under Linux or Windows.  In addition,
@@ -26,14 +26,18 @@ SIFT features (under Linux or Windows) and returns them in matrix
 form.  Use "showkeys" to display the keypoints superimposed on the
 image:
 
+```
   [image, descrips, locs] = sift('scene.pgm');
   showkeys(image, locs);
+```
 
 The "match" command is given two image file names.  It extracts SIFT
 features from each image, matches the features between the two images,
 and displays the results.
 
+```
   match('scene.pgm','book.pgm');
+```
 
 The result shows the two input images next to each other, with lines
 connecting the matching locations.  Most of the matches should be
@@ -44,8 +48,10 @@ constraints.
 
 You can also try matching other images:
 
+```
   match('scene.pgm','box.pgm');
   match('scene.pgm','basmati.pgm');
+```
 
 For more details, see the comments in the Matlab scripts: sift.m,
 showkeys.m, and match.m.
@@ -66,7 +72,9 @@ identical keypoints.
 You can detect keypoints and display them on the provided test images
 with the command line option "-display" as follows (for Linux):
 
+```
 % sift -display <book.pgm >result.pgm
+```
 
 [If you are using Windows, first open the Windows Command Prompt and
 cd to the directory containing the binary before executing the
@@ -77,7 +85,9 @@ This will write out a new image, result.pgm, with arrows overlayed
 indicating the locations, scales, and orientations of the key
 features.  You can inspect this image using the public domain program xv:
 
+```
 % xv result.pgm
+```
 
 or use any other tool that displays the common PGM image format.  
 
@@ -96,7 +106,6 @@ binaries will raise an exception for images with dimensions greater
 than about 1800 pixels in any dimension.  Color images will need to
 be convereted to grayscale (PGM format is only for grayscale images).
 
-
 ## ASCII file output for keypoints
 
 Without any command line arguments, the "keypoint" program will
@@ -104,7 +113,9 @@ output the keypoints in a simple ASCII file format that
 is convenient to read by other programs and provides the data needed
 for matching keypoints:
 
+```
 % sift <book.pgm >book.key
+```
 
 The file format starts with 2 integers giving the total number of
 keypoints and the length of the descriptor vector for each keypoint
@@ -118,7 +129,6 @@ a list of 128 integers in range [0,255].  Keypoints from a new image
 can be matched to those from previous images by simply looking for the
 descriptor vector with closest Euclidean distance among all vectors
 from previous images.
-
 
 ## Example of image matching using keypoints
 
@@ -138,11 +148,16 @@ this approach.
 
 First, create keypoints for each test image:
 
+```
 % sift <book.pgm >book.key
 % sift <scene.pgm >scene.key
+```
 
 To compile the matching code in this directory under Linux, simply do:
+
+```
 % make
+```
 
 [No makefile is given for Windows, although the code is quite portable
 and should be fairly easy to compile under Windows.]
@@ -151,7 +166,9 @@ This will create a demo program called "match".  This program
 requires command line arguments giving each of the two images and
 their corresponding keypoints:
 
+```
 % match -im1 book.pgm -k1 book.key -im2 scene.pgm -k2 scene.key > out.pgm
+```
 
 The resulting image in "out.pgm" contains the first image above the
 second one, with white lines connecting the matching locations.  Most
@@ -161,14 +178,18 @@ will be a few false outliers that could be removed by enforcing
 viewpoint consistency constraints.  You can inspect the matching
 results with xv:
 
+```
 % xv out.pgm
+```
 
 You can also try the results for the other objects in the scene:
 
+```
 % sift <box.pgm >box.key
 % match -im1 box.pgm -k1 box.key -im2 scene.pgm -k2 scene.key > out.pgm
 % sift <basmati.pgm >basmati.key
 % match -im1 basmati.pgm -k1 basmati.key -im2 scene.pgm -k2 scene.key > out.pgm
+```
 
 You should be able to run this demo program to find matches between
 any pair of images in PGM format.  Of course, this matching approach
