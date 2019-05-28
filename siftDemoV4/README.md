@@ -9,8 +9,7 @@ invariant features that can run under Linux or Windows.  In addition,
 there is a Matlab script as well as C source code showing how to load
 the features and do simple feature matching.
 
-See the web page at 
-  http://www.cs.ubc.ca/~lowe/keypoints/ 
+See the web page at http://www.cs.ubc.ca/~lowe/keypoints/ 
 for references to the relevant papers describing this approach.
 
 
@@ -27,8 +26,8 @@ form.  Use "showkeys" to display the keypoints superimposed on the
 image:
 
 ```
-  [image, descrips, locs] = sift('scene.pgm');
-  showkeys(image, locs);
+[image, descrips, locs] = sift('scene.pgm');
+showkeys(image, locs);
 ```
 
 The "match" command is given two image file names.  It extracts SIFT
@@ -36,7 +35,7 @@ features from each image, matches the features between the two images,
 and displays the results.
 
 ```
-  match('scene.pgm','book.pgm');
+match('scene.pgm','book.pgm');
 ```
 
 The result shows the two input images next to each other, with lines
@@ -49,8 +48,8 @@ constraints.
 You can also try matching other images:
 
 ```
-  match('scene.pgm','box.pgm');
-  match('scene.pgm','basmati.pgm');
+match('scene.pgm','box.pgm');
+match('scene.pgm','basmati.pgm');
 ```
 
 For more details, see the comments in the Matlab scripts: sift.m,
